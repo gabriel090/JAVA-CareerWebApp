@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE configuration
+        PUBLIC '-//mybatis.org//DTD Config 3.0//EN'
+        'http://mybatis.org/dtd/mybatis-3-config.dtd'>
+<configuration>
+    <properties resource='db.properties'/>
+    <typeAliases>
+        <typeAlias type="classes.career.model.User" alias="Users"/>
+        <typeAlias type="classes.career.model.JobEntity" alias="Job Entity"/>
+        <typeAlias type="classes.career.model.Contacts" alias="Contact"/>
+        
+    </typeAliases>
+    <environments default='development'>
+        <environment id='development'>
+            <transactionManager type='JDBC'/>
+            <dataSource type='POOLED'>
+                <property name="driver" value="${db.driver}"/>
+                <property name="url" value="${db.url}"/>
+                <property name="username" value="${db.username}"/>
+                <property name="password" value="${db.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+    <mappers>
+        <mapper resource="myBatis/mappers/UserMapper.xml"/>
+        <mapper resource="myBatis/mappers/ContactsMapper.xml"/>
+        <mapper resource="myBatis/mappers/JobEntityMapper.xml"/>
+    </mappers>
+</configuration>

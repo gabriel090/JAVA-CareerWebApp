@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+        'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+<mapper namespace='main.classes.career.mapper.UserMapper'>
+
+    <resultMap id='UserResult' type='User'>
+        <id property='userId' column='user_id'/>
+        <result property='firstName' column='first_name'/>
+        <result property='lastName' column='last_name'/>
+        <result property='age' column='age'/>
+        <result property='dateCreated' column='date_created'/>
+      
+    </resultMap>
+
+    <select id="getAllUsersDescByDate" parameterType="Integer" resultMap="UserResult">
+        SELECT *
+        FROM User
+        ORDER BY date_created DESC LIMIT #{page}, 20
+    </select>
+
+    <select id="getAllUsersAcsByDate" parameterType="Integer" resultMap="UserResult">
+        SELECT *
+        FROM User
+        ORDER BY User.date_created ASC LIMIT #{page}, 20
+    </select>
+
+    <select id="getAllUsersDescByFirstName" parameterType="Integer" resultMap="UserResult">
+        SELECT *
+        FROM User
+        ORDER BY User.first_name DESC LIMIT #{page}, 20
+    </select>
+
+    <select id="getAllUsersAcsByFirstName" parameterType="Integer" resultMap="UserResult">
+        SELECT *
+        FROM User
+        ORDER BY User.first_name ASC LIMIT #{page}, 20
+    </select>
+
+    <select id="getAllUsersDescByLastName" parameterType="Integer" resultMap="UserResult">
+        SELECT *
+        FROM User
+        ORDER BY User.last_name DESC LIMIT #{page}, 20
+    </select>
+
+    <select id="getAllUsersAcsByLastName" parameterType="Integer" resultMap="UserResult">
+        SELECT *
+        FROM User
+        ORDER BY User.last_name ASC LIMIT #{page}, 20
+    </select>
+
+
+    <select id='getUserById' parameterType='Integer' resultMap='UserResult'>
+        SELECT
+        user_id,
+        first_name,
+        last_name,
+        age,
+        date_created
+        FROM User
+        WHERE user_id = #{userId}
+    </select>
+
+    <select id='getAllUsers' resultMap='UserResult'>
+        SELECT * FROM USER
+    </select>
+
+    <select id="getRowsCount" resultType="int">
+        SELECT COUNT(*) FROM User
+    </select>
+
+    <insert id='insertUser' parameterType='User' useGeneratedKeys='true' keyProperty='id'>
+        INSERT INTO USER(first_name, last_name, age)
+        VALUES(#{firstName}, #{lastName}, #{age})
+    </insert>
+
+    <update id='updateUser' parameterType='User'>
+        UPDATE User
+        SET
+        first_name = #{firstName},
+        last_name = #{lastName},
+        age = #{age}
+        WHERE user_id = #{userId}
+    </update>
+
+    <delete id='removeUser' parameterType='Integer'>
+        DELETE FROM User WHERE user_id = #{userId}
+    </delete>
+
+
+
+</mapper>
