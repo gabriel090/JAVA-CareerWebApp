@@ -24,6 +24,8 @@ public class User {
    
     private Date dateCreated;
     
+    private JobEntity jobEntity;
+    
     public User() {
     	
     }
