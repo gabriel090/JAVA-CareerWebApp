@@ -9,6 +9,10 @@ public interface ContactsMapper {
 
     List<Contacts> getAllContacts(Integer userId);
 
+    void updateContacts(Contacts newContacts);
+    void insertContacts(Contacts contacts);   
+    void removeContacts(Contacts contacts);
+
     //****  EMAIL  ****//
 
     Contacts getEmail(Integer userId);

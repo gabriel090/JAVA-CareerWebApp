@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+        'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+<mapper namespace='main.classes.career.mapper.ContactsMapper'>
+
+    <!-- All Contacts -->
+  <resultMap id="AllContactsResult" type="Contact">
+      <association property="email" resultMap="EmailResult"/>
+      <association property="address" resultMap="AddressResult"/>
+      <association property="phone" resultMap="PhoneResult"/>
+    
+  </resultMap>
+
+    <select id="getAllContacts" parameterType="Integer" resultMap="AllContactsResult">
+       SELECT *
+        FROM Contacts
+        WHERE user_id = #{userId}
+    </select>
+
+   
+    <update id="updateContacts" parameterType="Contact">
+    
+        UPDATE Contacts
+        SET
+        email = #{email},
+        address = #{address},
+        phone_number = #{phone}
+       
+             
+        WHERE user_id = #{userId}
+    </update>
+
+
+    <insert id="insertContacts" parameterType="Contact">
+        INSERT INTO Contacts(user_id ,email, phone,address)
+        VALUES(#{userId}, #{email}, #{phone}, #{address})
+    </insert>
+
+    <delete id="removeContacts" parameterType="Integer">
+        DELETE FROM Contacts WHERE user_id = #{userId}
+    </delete>
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE mapper PUBLIC '-//mybatis.org//DTD Mapper 3.0//EN'
+        'http://mybatis.org/dtd/mybatis-3-mapper.dtd'>
+<!-- Instead of referencing Fully Qualified Class Names we can register Aliases in mybatis-config.xml and use Alias names. -->
+<mapper namespace='main.classes.career.mapper.JobEntityMapper'>
+
+
+    <resultMap type='Skill' id='jobEntity'>
+        <id property='jobId' column='job_id'/>
+        <result property='name' column='name'/>
+        <result property='description' column='description'/>
+        <result property='type' column='type'/>
+        <result property='educationLevel' column='education_level'/>
+        <result property='status' column='status'/>
+        <result property='interviewDate' column='interview_date'/>
+        <result property='startTime' column='start_time'/>
+        <result property='endTime' column='end_time'/>
+
+        
+    </resultMap>
+
+    <select id="getJobEntity" resultMap="jobEntity" parameterType="Integer">
+      SELECT
+	  S.name, S.description, S.type, S.education_level, S.interview_date,S.start_time,S.end_time
+	  C.user_id
+	  FROM JobEntity S LEFT JOIN User C ON C.user_id=S.user_id
+	  WHERE S.user_id = #{userId}
+	  ORDER BY interview_date DESC
+    </select>
+
+    <select id="getTopJobEntity" resultMap="jobEntity" parameterType="Integer">
+        SELECT TOP 3 name, description,interview_date
+        FROM JobEntity
+        WHERE user_id = #{userId}
+        ORDER BY name DESC
+    </select>
+
+    <select id="getUniqueJobEntity" resultMap="jobEntity">
+      SELECT DISTINCT name FROM JobEntity;
+    </select>
+
+
+    <update id="updateJobEntity" parameterType="Skill">
+    
+        UPDATE JobEntity
+        SET
+        name = #{name},
+        description = #{description},
+        type = #{type},
+        education_level = #{educationLevel},
+        interview_date = #{interviewDate},
+        start_time = #{startTime},
+        end_time = #{endTime}
+             
+        WHERE user_id = #{userId}
+    </update>
+
+    <insert id="insertJobEntity" parameterType="Skill">
+        INSERT INTO JobEntity(name, description,type,education_level,interview_date,start_time,end_time)
+        VALUES (#{name}, #{description},#{type}, #{educationLevel},#{interviewDate}, #{startTime},#{endTime})
+    </insert>
+
+   
+
+    <delete id="removeJobEntity" parameterType="Skill">
+        DELETE FROM JobEntity
+        WHERE user_id = #{userId}
+    </delete>
+
+
+</mapper>

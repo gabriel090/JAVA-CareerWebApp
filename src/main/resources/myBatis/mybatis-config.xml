@@ -5,9 +5,9 @@
 <configuration>
     <properties resource='db.properties'/>
     <typeAliases>
-        <typeAlias type="classes.career.model.User" alias="Users"/>
-        <typeAlias type="classes.career.model.JobEntity" alias="Job Entity"/>
-        <typeAlias type="classes.career.model.Contacts" alias="Contact"/>
+        <typeAlias type="main.classes.career.model.User" alias="Users"/>
+        <typeAlias type="main.classes.career.model.JobEntity" alias="Job Entity"/>
+        <typeAlias type="main.classes.career.model.Contacts" alias="Contact"/>
         
     </typeAliases>
     <environments default='development'>
