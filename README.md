@@ -11,3 +11,6 @@ In the Job Entity, It has Job Name, Description, Interview date , Interview star
 On the main page, near the User's name , There is a list of 3 top-rated Jobs which are available.
 Every User's details can be updated with the previous validation of the input forms.
 THe tables list are displayed on every page with 20 entries on each row.
+To Run the the Project, generate War file with the command “mvn install -DskipTests” without the “” from the project directory on the IDE’s Terminal
+Deploy the war file generated from the directed target/CareerWebApp-0.0.1-SNAPSHOT.war to tomcat server
+Access the webapp on http://localhost:8080/ProjectFolder
