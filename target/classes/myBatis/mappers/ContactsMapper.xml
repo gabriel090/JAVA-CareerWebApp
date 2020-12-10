@@ -25,7 +25,7 @@
         SET
         email = #{email},
         address = #{address},
-        phone = #{phone}
+        phone_number = #{phone}
        
              
         WHERE user_id = #{userId}
